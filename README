@@ -1,0 +1,17 @@
+Cell Membrane
+=============
+
+Provides a "design mode" for rails cells so that they can be viewed in isolation when you're just interested in how they look.
+
+
+Install
+=======
+script/plugin install http://github.com/cowboyd/cell-membrance.git
+
+Place into your layout:
+* <%= cell_stylesheet_link_tag %>
+* <%= cell_script_tag %>
+
+
+
+Copyright (c) 2009 Charles Lowell of Frontside, released under the MIT license

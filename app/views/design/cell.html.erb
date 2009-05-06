@@ -1,0 +1,82 @@
+
+<% content_for :style do %>
+<style type="text/css" media="screen">
+	#designPage {
+		border: dashed 1px black;
+		margin: auto;
+		margin-top: 150px;
+	}
+
+	#designWrapper.haloActive {
+		border: 1px solid blue;
+	}
+
+	.verticalIndicator {
+		background-image: url(<%= image_path "pixels/000000.gif" %>);
+		background-position: center;
+		background-repeat: repeat-y;
+		height: 100px;
+	}
+
+	.horizontalIndicator {
+		background-image: url(<%= image_path "pixels/000000.gif" %>);
+		background-position: center;
+		background-repeat: repeat-x;
+	}
+
+	.leftAlign {
+		text-align: left;
+	}
+
+	.rightAlign {
+		text-align: right;
+	}
+
+	.center {
+		text-align: center;
+	}
+</style>
+<% end%>
+<div><%= link_to "Index", :controller => 'design' %></div>
+<span class="designSpec"><b>cell:</b></span><%=  cell_links(@cells, @cell_name).join(' | ') %>
+<div><b>profile:</b> <%= profile_links(@cell_name, @aspect, @profile) .join(' | ') %></div>
+<div><b>aspects:</b> <%= aspect_links(@cell_name, @aspects, @aspect, @profile).join(' | ') %></div>
+<div><label for="halo">Halo</label> <input id="halo" type="checkbox" unchecked="true"/></div>
+
+<div id="designPage">
+	<table cellspacing="0" cellpadding="0" style="width: 100%;">
+		<tr><td colspan="3"><div class="verticalIndicator"></div><div class="center"><%=image_tag "design/downarrow.gif" %></div></td></tr>
+		<tr>
+			<td class="horizontalIndicator rightAlign"><%= image_tag "design/rightarrow.gif" %></td>
+			<td style="width: <%= @width %>px;"><div id="designWrapper"><%= render_cell @cell_name, @aspect, design_opts(@cell_name, @profile) %></div></td>
+			<td class="horizontalIndicator leftAlign"><%= image_tag "design/leftarrow.gif" %> </td>
+		</tr>
+		<tr><td colspan="3" class="center"><%= image_tag "design/uparrow.gif" %><div class="verticalIndicator"></div></td></tr>
+	</table>
+</div>
+
+<% content_for :script do %>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		var wrapper = $("#designWrapper")
+		$("#halo").change(function() {
+			if (this.checked) {
+				wrapper.addClass('haloActive')
+			} else {
+				wrapper.removeClass('haloActive')
+			}
+		})
+		$("a", wrapper).each(function() {
+
+			if (!this.href.match(/#$/)) {
+				$(this).click(function() {
+					alert("link to: '" + $(this).attr('href') + "'")
+					return false
+				})
+			}
+		})
+	})
+
+	<%= design_profile(@cell_name, @profile).javascript %>
+</script>
+<% end%>

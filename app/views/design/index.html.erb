@@ -1,0 +1,27 @@
+
+<% content_for :style do %>
+	<style type="text/css">
+		#cells {
+			margin-left: 25px;
+			margin-top: 25px;
+		}
+
+		.cell {
+			font-size: 20px;			
+		}
+
+		.aspect {
+			padding-left: 25px;				
+		}
+		
+	</style>
+<% end %>
+
+<div id="cells">
+	<% for cell in @cells do %>
+		<div class="cell"><%=  cell.name %> </div>
+		<%for aspect in cell.aspects do %>
+			<div class="aspect"><a href="design/<%= "#{cell.name}/#{aspect}" %>"><%= aspect %></a></div>
+		<% end %>
+	<% end %>
+</div>
