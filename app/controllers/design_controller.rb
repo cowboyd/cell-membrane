@@ -6,7 +6,6 @@ class DesignController < ApplicationController
 	end
 
 	def cell
-		@query = Query.new
 		@cells = _find_cells
 		@cell_name = params[:cell].intern
     @aspect = params[:aspect].intern
