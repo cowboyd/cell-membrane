@@ -1,4 +1,5 @@
 
+Cell::Base
 require 'design'
 
 FileUtils.cp_r File.join(File.dirname(__FILE__), 'public', 'images', 'design'), "#{Rails.public_path}/images"
